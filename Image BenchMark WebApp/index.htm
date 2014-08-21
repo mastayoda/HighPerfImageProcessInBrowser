@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Web Workers BenchMark</title>
+    <link rel="stylesheet" type="text/css" href="css/styles.css" />
+    <link href="css/jquery-ui.css" rel="stylesheet">
+    <script src="js/jquery.js"></script>
+    <script src="js/jquery-ui.js"></script>
+    <script src="js/Chart.js"></script>
+    <script src="js/parallel.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/Filters.js"></script>
+    <script src="js/workerFilters.js"></script>
+    <script src="js/webClFilters.js"></script>
+    <script src="js/main.js"></script>
+</head>
+
+<body>
+
+    <div id="wrapper">
+
+        <div id="contentwrap">
+            <div id="content">
+
+                <canvas id="benchMarkResults" width="1000" height="400"></canvas>
+                <hr>
+                <p>
+                    <table>
+                        <tr>
+                            <td>
+                                <img src="images/SingleThread.png" />
+                            </td>
+                            <td>Single Thread Milliseconds</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <img src="images/Webworker.png" />
+                            </td>
+                            <td>Webworker Milliseconds</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <img src="images/webCl.png" />
+                            </td>
+                            <td>WebCl Milliseconds</td>
+                        </tr>
+                    </table>
+                </p>
+                <div>
+                    <hr>
+                    <p>
+                        <fieldset>
+                            <h2>
+                                <legend>Benchmark Parameters:</legend>
+                            </h2>
+                            <br>
+                            <br>Number of Workers:
+                            <input id="spinner" name="value">
+
+                            <br>
+                            <br>
+                            <label for="amount">Amount of Data:</label>
+
+                            <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
+                            <div id="slider-range-min"></div>
+                            <br>
+                            <br>
+                            <hr>
+                            <input type="checkbox" id="check">
+                            <label for="check">Use Transferable Objects</label>
+                            <br>
+                            <br>
+                            <hr>
+                            <h2>Algorithm:</h2>
+                            <div id="radio">
+                                <input type="radio" id="rdSumArray" name="radio" checked="checked">
+                                <!--<label for="rdSumArray">Sum Array</label>
+                                <input type="radio" id="rdReverseArray" name="radio">
+                                <label for="rdReverseArray">Reverse Array</label> -->
+                                <input type="radio" id="rdProcessImage" name="radio">
+                                <label for="rdProcessImage">Process Image</label>
+                            </div>
+                            <div id="divImageAlgo">
+
+                                <hr>
+                                <h2>Filters:</h2>
+                                <div id="imgRadio">
+                                    <input type="radio" id="rdGrayscale" name="imgRadio" checked="checked">
+                                    <label for="rdGrayscale">Grayscale</label>
+                                    <input type="radio" id="rdBrightness" name="imgRadio">
+                                    <label for="rdBrightness">Brightness</label>
+                                    <input type="radio" id="rdThreshold" name="imgRadio">
+                                    <label for="rdThreshold">Threshold</label>
+                                    <input type="radio" id="rdBlur" name="imgRadio">
+                                    <label for="rdBlur">Blur</label>
+                                    <input type="radio" id="rdSharpen" name="imgRadio">
+                                    <label for="rdSharpen">Sharpen</label>
+                                    <input type="radio" id="rdEdge" name="imgRadio">
+                                    <label for="rdEdge">Sober Edge Detection</label>
+                                </div>
+                            </div>
+                            <hr>
+                            <br>
+                            <br>
+                            <label>WebCl Host Device</label>
+                            <select id="slctHostDevice">
+                            </select>
+                            &nbsp;&nbsp;
+                            <button id="btnDumpWebCL">Dump WebCL Info</button>
+                            <hr>
+                            <br>
+                            <br>
+                            <button id="btnExecute">Execute</button>
+                        </fieldset>
+                    </p>
+                </div>
+                <div id="dialogOriginal" title="Original Image">
+                    <input type="file" id="files" name="files[]" multiple />
+                    <output id="list"></output>
+                    <img id="imgOriginal" />
+                </div>
+                <div id="dialogSingleThread" title="Single Thread Processed Image">
+                    <canvas id="imgSingle"></canvas>
+                </div>
+                <div id="dialogWorkers" title="Workers Processed Image">
+                    <canvas id="imgWorkers"></canvas>
+
+                </div>
+                <div id="dialogWebCl" title="WebCl Processed Image">
+                    <canvas id="imgWebCl"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

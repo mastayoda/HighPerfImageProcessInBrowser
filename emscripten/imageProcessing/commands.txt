@@ -1,0 +1,1 @@
+ emcc lodepng.cpp example_encode.cpp -s NO_EXIT_RUNTIME=1 -o example_encode.html
