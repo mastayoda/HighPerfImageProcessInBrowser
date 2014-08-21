@@ -1,0 +1,33 @@
+{
+  "name": "node-connection",
+  "authors": [
+    "Ian Wehrman <wehrman@adobe.com>"
+  ],
+  "main": "index.js",
+  "moduleType": [
+    "node"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "eventEmitter": "~4.2.7",
+    "bluebird": "~1.2.4"
+  },
+  "homepage": "https://github.com/iwehrman/node-connection",
+  "_release": "945daa1b1f",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "945daa1b1f6b17cfbddd7d053255b20c166bdd00"
+  },
+  "_source": "https://github.com/iwehrman/node-connection.git",
+  "_target": "*",
+  "_originalSource": "https://github.com/iwehrman/node-connection.git"
+}

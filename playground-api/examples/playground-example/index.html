@@ -1,0 +1,274 @@
+<!doctype html>
+<!--
+   Copyright (c) 2014 Adobe Systems Incorporated. All rights reserved.
+    
+   Permission is hereby granted, free of charge, to any person obtaining a
+   copy of this software and associated documentation files (the "Software"),
+   to deal in the Software without restriction, including without limitation
+   the rights to use, copy, modify, merge, publish, distribute, sublicense,
+   and/or sell copies of the Software, and to permit persons to whom the
+   Software is furnished to do so, subject to the following conditions:
+    
+   The above copyright notice and this permission notice shall be included in
+   all copies or substantial portions of the Software.
+    
+   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+   IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+   FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+   AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+   LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+   FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+   DEALINGS IN THE SOFTWARE.
+   -->
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title></title>
+      <link rel="stylesheet" href="css/custom-theme/jquery-ui-1.10.4.custom.css"/>
+      <link rel="stylesheet" href="css/styles.css"/>
+      <link rel="stylesheet" href="css/jsoneditor.css"/>
+      <link rel="stylesheet" href="css/jquery.dataTables.css"/>
+      <link rel="stylesheet" href="css/spectrum.css"/>
+      <link rel="stylesheet" href="css/xcode.css">
+      <script src="scripts/jquery.js"></script>
+      <script src="scripts/jquery.dataTables.js"></script>
+      <script src="scripts/PSConstantsData.js"></script>
+      <script src="scripts/highlight.pack.js"></script>
+      <script src="scripts/highlight.pack.js"></script>
+      <script src='scripts/spectrum.js'></script>
+      <script>
+         /* INITIALIZING DATA TABLE */
+         $(document).ready(function () {
+            /* GLOBAL FLAG */
+            window.dialogHasBeenOpened = false;
+         
+            
+            var arr = [
+                ["<button class='btnconst'>phClassApplication</button>", "<button class='btnTypeID'>1667330160</button>", "<button class='btnCharID'>capp</button>", "<button class='btnStringID'>application</button>"],
+                ["<button class='btnconst'>phClassDocument</button>", "<button class='btnTypeID'>1147366766</button>", "<button class='btnCharID'>Dcmn</button>", "<button class='btnStringID'>document</button>"]
+            ];
+         
+            $('#table_id').dataTable({
+                //data:PSConstantsData,
+                data: arr,
+                "fnDrawCallback": function (oSettings) {
+                    if (window.dialogHasBeenOpened)
+                        window.initializeTable();
+         
+                }
+            });
+         
+         
+         });
+      </script>
+      <script src="scripts/jsoneditor.js"></script>
+      <script>require = { urlArgs: "bust=" +  (new Date()).getTime() }</script>
+      <script data-main="main" src="../../bower_components/requirejs/require.js"></script>   
+      <script src="scripts/jquery-ui.min.js"></script>
+   </head>
+   <body>
+      <!-- ******************************** MAIN CONSOLE *************************************-->  
+      <button id="btnOpenConsole">Show Playground Dev Console</button>
+      <!-- CONSOLE DIALOG -->
+      <div id="divDevConsole" title="Dev Console">
+         <div id="tabs">
+            <ul>
+               <li><a href="#tabs-tools">Tools</a></li>
+               <li><a href="#tabs-API">API</a></li>
+            </ul>
+            <div id="tabs-tools">
+               <table>
+                  <tr>
+                     <td><button id="btnBenchMark">Benchmark API</button>
+                     <td>
+                     <td><button id="btnCallExecutor">Execute PS Call/Get</button>
+                     <td>
+                     <td><button id="btnJsonShowTreeConsole">Show JSON Tree Console</button>
+                     <td>
+                     <td><button id="btnJsonShowCodeConsole">Show JSON Code Console</button>
+                     <td>
+                  </tr>
+                  <tr>
+                     <td><button id="btnEventListenerConsole">Event Listener Console</button></td>
+                     <td>&nbsp;</td>
+                     <td><button id="btnEventLeapMotionConsole">Leap Motion Experiment</button></td>
+                     <td>&nbsp;</td>
+                     <td><button id="btnColorPicker">Color Picker Console</button></td>
+                  </tr>
+               </table>
+            </div>
+            <div id="tabs-API">
+               <table>
+                  <tr>
+                     <td><button id="btnApplication">Application</button>
+                     <td>
+                     <td><button id="btnDocument">Document</button>
+                     <td>
+                     <td><button id="btnPreferences">Preferences</button>
+                     <td>
+                     <td><button id="btnNotifier">Notifier</button>
+                     <td>
+                  </tr>
+                  <tr>
+                     <td><button id="btnGuides">Guides</button>
+                     <td>
+                     <td><button id="btnLayers">Layers</button>
+                     <td>
+                     <td><button id="btnUnduandHistory">Undo and History</button>
+                     <td>
+                     <td><button id="btnVectorDrawing">Vector Drawing</button>
+                     <td>
+                  </tr>
+               </table>
+            </div>
+         </div>
+      </div>
+      <!-- ******************************** ALL TOOLS CONSOLES *************************************-->
+      <!-- EXECUTE PS CALL GET DIALOG -->
+      <div id="divExecConsole" title="Execute PS Call/Get">
+         <div id="radio">
+            <input type="radio" id="rdbCall" name="radio" ><label for="rdbCall">Call</label>
+            <input type="radio" id="rdbGet" name="radio" checked="checked"><label for="rdbGet">Get</label>
+         </div>
+         <br>
+         <hr>
+         <div class="ui-widget">
+            <div id="divExecutionMessage" class="ui-state-highlight ui-corner-all" style="padding: 0 .7em;">
+               <p><span class="ui-icon ui-icon-alert" style="float: left; margin-right: .3em;"></span> 
+                  <strong>Alert: </strong><span id="spnExecutionMessage"></span>
+               </p>
+            </div>
+         </div>
+         <hr>
+         <br>
+         <table id="table_id" class="display">
+            <thead>
+               <tr>
+                  <th>Constant ID</th>
+                  <th>Type ID</th>
+                  <th>Char ID</th>
+                  <th>String ID</th>
+               </tr>
+            </thead>
+            <tbody>
+            </tbody>
+         </table>
+      </div>
+      <!-- JSON TREE CONSOLE -->
+      <div id="divJsonTreeConsole" title="JSON Tree Console">
+         <button id="btnToggleTransformation">Toggle Transformation</button>
+         <div id="jsonTreeEditor"></div>
+      </div>
+      <!-- JSON TREE CONSOLE -->
+      <div id="divJsonCodeConsole" title="JSON Code Console">
+         <div id="jsonCodeEditor"></div>
+      </div>
+      <!-- JSON TREE CONSOLE -->
+      <div id="divEventListenerConsole" title="Event Listener Console">
+         <table id="tblEventList">
+            <tbody>
+            </tbody>
+         </table>
+         <button id="btnClearEventList">CLEAR EVENT LIST</button>
+      </div>
+      <!-- LEAP MOTION CONSOLE -->
+      <div id="divLeapMotionConsole" title="Leap Motion Console">
+         <div id="out"></div>
+      </div>
+      <div id="divColorPicker" title="ColorPickerConsole">
+         <input id="colorPicker" type='text' />
+          Preset Color:
+          <select id="sltColor">
+             <option value="LgtB">Light Blue</option>
+             <option value="LgtR">Light Red</option>
+             <option value="Grn ">Grain</option>
+             <option value="MdmB">Medium Blue</option>
+             <option value="Yllw">Yellow</option>
+             <option value="Mgnt">Magenta</option>
+             <option value="Cyn ">Cyan</option>
+             <option value="LgtG">light Gray</option>
+             <option value="Blck">Black</option>
+          </select>
+          <button id="btnSetPresetColor">Set Color</button>
+      </div>
+      <!-- ******************************** ALL API CONSOLES *************************************-->
+      <!-- APPLICATION CONSOLE -->
+      <div id="divApplicationConsole" title="Application">
+      </div>
+      <!-- DOCUMENT CONSOLE -->
+      <div id="divDocumentConsole" title="Document">
+      </div>
+      <!-- PREFERENCES CONSOLE -->
+      <div id="divPreferencesConsole" title="Preferences">
+      </div>
+      <!-- NOTIFIER CONSOLE -->
+      <div id="divNotifierConsole" title="Notifier">
+      </div>
+      <!-- GUIDES CONSOLE -->
+      <div id="divGuidesConsole" title="Guides">
+         <div id="divCreateGuide" class="consoleSubDiv">
+           <h4>Create Guide</h4>
+            Orientation: 
+            <select name="orientation">
+               <option>Horizontal</option>
+               <option>Vertical</option>
+            </select>
+            <br>
+            Position: 
+            <input name="position" type="number" value="0"/>
+            <br>
+            <br>
+            <button id="btnCreateGuide">Create Guide</button>
+         </div>
+         
+         <div id="divCreateGuide" class="consoleSubDiv">
+         <h4>Clear Guides</h4>
+            <br>
+            <button id="btnClearGuide">Clear Guides</button>
+         </div>
+         <div id="divSetGuideColor" class="consoleSubDiv">
+         <h4>Set Guides Color</h4>
+             Color:
+             <input type="text" id="txtguideColor"/>
+             <br>
+             <br>
+             <button id="btnSetColor">Set Color</button>
+         </div>
+         <div id="divSetGuideStyle" class="consoleSubDiv">
+         <h4>Set Guides Style</h4>
+             Style:
+            <select name="guideStyle">
+               <option value="DshL" >Dash Lines</option>
+               <option value="Lns " >Lines</option>
+            </select>
+             <br>
+             <br>
+             <button id="btnSetGuideStyle">Set Style</button>
+         </div>
+      </div>
+      <!-- LAYERS CONSOLE -->
+      <div id="divLayersConsole" title="Layers">
+      </div>
+      <!-- UNDU AND HISTORY CONSOLE -->
+      <div id="divUndoAndHistoryConsole" title="Undo And History">
+      </div>
+      <!-- VECTOR DRAWING CONSOLE -->
+      <div id="divVectorDrawingConsole" title="Vector Drawing">
+      </div>
+      <!-- ******************************** CLIENT CODE *************************************-->
+      <script src="scripts/uiConsoles/Common.js"></script>
+      <script src="scripts/init.js"></script>
+      <script src="scripts/uiConsoles/DevConsole.js"></script>
+      <script src="scripts/uiConsoles/ApplicationConsole.js"></script>
+      <script src="scripts/uiConsoles/DocumentConsole.js"></script>
+      <script src="scripts/uiConsoles/EventListenerConsole.js"></script>
+      <script src="scripts/uiConsoles/ExecConsole.js"></script>
+      <script src="scripts/uiConsoles/JsonCodeConsole.js"></script>
+      <script src="scripts/uiConsoles/JsonTreeConsole.js"></script>
+      <script src="scripts/uiConsoles/LeapMotionConsole.js"></script>
+      <script src="scripts/uiConsoles/PreferencesConsole.js"></script>
+      <script src="scripts/uiConsoles/ColorPickerConsole.js"></script>  
+
+      <script src="scripts/uiConsoles/GuidesConsole.js"></script>
+   </body>
+</html>
